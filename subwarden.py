@@ -38,5 +38,13 @@ class subwarden:
     data = self._load_Fingerprints()
 
     for entry in data:
-      if entry['fingerprint'] in subdomain_content and any(cname in cname_records for cname in entry['cname']) or entry['cname'] == []:
-        print(f"[{subdomain}] [{entry['status']}] [{entry['service']}]")
+      if entry['fingerprint'] in subdomain_content and entry['cname'] == []:
+        print(f"[{subdomain}] [{entry['status']}] [{entry['service']}] [BLANK_FP_CNAME]")
+      elif entry['fingerprint'] in subdomain_content and entry['cname'] != []:
+        
+
+
+
+
+
+
