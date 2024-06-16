@@ -1,7 +1,7 @@
 import json
 import requests
 import sys
-import dns.python
+import dns.resolver
 import re
 
 class subwarden:
@@ -21,7 +21,7 @@ class subwarden:
 
   def active_detection(self, subdomain, output_File=None):
     try:
-      cname_records = dns.resolver.query(subdomain, "CNAME")
+      cname_records = dns.resolver.resolve(subdomain, "CNAME")
     except:
       return
 
@@ -55,4 +55,4 @@ class subwarden:
             f.write(message + "\n")
 
 if __name__ == "__main__":
-  subwarden().active_detection(subdomain="sub.example.com")
+  subwarden(hosts="foobar").active_detection(subdomain="sub.example.com")
