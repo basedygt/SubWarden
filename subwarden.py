@@ -86,8 +86,8 @@ if __name__ == "__main__":
 --------------------------------------------------------
 """)
     print("Usage: python3 subwarden.py <subdomains_file> <output_file> <threads>")
-    print("Example:")
-    print("        python3 subwarden.py subs.txt output.txt")
-    print("        python3 subwarden.py subs.txt output.txt 20\n")
+    print("Examples:")
+    print("  python3 subwarden.py subs.txt output.txt")
+    print("  python3 subwarden.py subs.txt output.txt 20\n")
   else:
     subwarden(hosts=f"{sys.argv[1]}").active_detection_threaded(output_File=f"{sys.argv[2]}", max_threads=int(sys.argv[3]))
