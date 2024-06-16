@@ -44,10 +44,7 @@ class subwarden:
         print(message)
       elif entry['fingerprint'] in subdomain_content and entry['cname'] != []:
         for record in cname_records:
-          
-
-
-
-
-
-
+          for cname_fp in entry['cname']:
+            if re.search(re.escape(record), cname_fp):
+              message = f"[{subdomain}] [{entry['status']}] [{entry['service']}]"
+              print(message)
