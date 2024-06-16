@@ -75,4 +75,18 @@ class subwarden:
           print(f"Error occurred: {str(e)}")
 
 if __name__ == "__main__":
-  # subwarden(hosts="subs.txt").active_detection_threaded(output_File="subwarden.txt")
+  if len(sys.argv) != 3 or sys.argv[1] == "help":
+    print("""
+--------------------------------------------------------
+|                                                      |
+|                Welcome to SubWarden!                 |
+|     A powerful tool by basedygt for detecting        |
+|            subdomain takeover risks in Python        |
+|                                                      |
+--------------------------------------------------------
+""")
+    print("Usage: python3 subwarden.py <subdomains_file> <output_file>")
+    print("Example:")
+    print("        python3 subwarden.py subs.txt output.txt\n")
+  else:
+    subwarden(hosts=f"{sys.argv[1]}").active_detection_threaded(output_File=f"{sys.argv[2]}")
