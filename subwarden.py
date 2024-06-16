@@ -19,7 +19,7 @@ class subwarden:
     
     return data
 
-  def active_detection(self, subdomain):
+  def active_detection(self, subdomain, output_File=None):
     try:
       cname_records = dns.resolver.query(subdomain, "CNAME")
     except:
@@ -48,3 +48,8 @@ class subwarden:
             if re.search(re.escape(record), cname_fp):
               message = f"[{subdomain}] [{entry['status']}] [{entry['service']}]"
               print(message)
+
+      if output_File:
+        if message:
+          with open(output_File, "a") as f:
+            f.write(message + "\n")
