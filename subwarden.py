@@ -75,7 +75,7 @@ class subwarden:
           print(f"Error occurred: {str(e)}")
 
 if __name__ == "__main__":
-  if len(sys.argv) != 4 or sys.argv[1] == "help":
+  if len(sys.argv) == 1 or len(sys.argv) > 4 or sys.argv[1] == "help":
     print("""
 --------------------------------------------------------
 |                                                      |
