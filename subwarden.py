@@ -2,6 +2,7 @@ import json
 import requests
 import sys
 import dns.python
+import re
 
 class subwarden:
 
@@ -39,9 +40,11 @@ class subwarden:
 
     for entry in data:
       if entry['fingerprint'] in subdomain_content and entry['cname'] == []:
-        print(f"[{subdomain}] [{entry['status']}] [{entry['service']}] [BLANK_FP_CNAME]")
+        message = f"[{subdomain}] [{entry['status']}] [{entry['service']}] [BLANK_FP_CNAME]"
+        print(message)
       elif entry['fingerprint'] in subdomain_content and entry['cname'] != []:
-        
+        for record in cname_records:
+          
 
 
 
