@@ -15,6 +15,7 @@ class subwarden:
     except Exception as e:
       print(f"Unable to load fingerprints: {str(e)}")
       sys.exit(1)
+    
     return data
 
   def active_detection(self, subdomain):
@@ -28,15 +29,14 @@ class subwarden:
     try:
       resp = requests.get(f"https://{subdomain}/", headers=header, allow_redirects=True, verify=False, timeout=5)
     except:
-      resp = requests.get(f"http://{subdomain}/", headers=header, allow_redirects=True, verify=False, timeout=5)
+      try:
+        resp = requests.get(f"http://{subdomain}/", headers=header, allow_redirects=True, verify=False, timeout=5)
+      except:
+        return
 
     subdomain_content = resp.text
     data = self._load_Fingerprints()
 
     for entry in data:
-      if entry['fingerprint'] in subdomain_content and entry['cname'] in cname_records:
+      if entry['fingerprint'] in subdomain_content and any(cname in cname_records for cname in entry['cname']) or entry['cname'] == []:
         print(f"[{subdomain}] [{entry['status']}] [{entry['service']}]")
-
-
-
-    
