@@ -53,3 +53,6 @@ class subwarden:
         if message:
           with open(output_File, "a") as f:
             f.write(message + "\n")
+
+if __name__ == "__main__":
+  subwarden().active_detection(subdomain="sub.example.com")
