@@ -85,7 +85,7 @@ if __name__ == "__main__":
 |                                                      |
 --------------------------------------------------------
 """)
-    print("Usage: python3 subwarden.py <subdomains_file> <output_file> <threads>")
+    print("Usage: python3 subwarden.py <subdomains_file> <output_file> <threads>\n")
     print("Examples:")
     print("  python3 subwarden.py subs.txt output.txt")
     print("  python3 subwarden.py subs.txt output.txt 20\n")
