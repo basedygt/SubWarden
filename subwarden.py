@@ -59,7 +59,7 @@ class subwarden:
             with open(output_File, "a") as f:
               f.write(message + "\n")
 
-  def active_detection_threaded(self, max_threads=10, output_File=None):
+  def active_detection_threaded(self, max_threads=50, output_File=None):
     with open(self.hosts, "r") as f:
       subdomains = f.read().split("\n")
 
