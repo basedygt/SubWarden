@@ -23,7 +23,7 @@ class subwarden:
     
     return data
 
-  def active_detection(self, subdomain, output_File=None):
+  def active_detection(self, data, subdomain, output_File=None):
     try:
       cname_records = dns.resolver.resolve(subdomain, "CNAME")
     except:
@@ -40,7 +40,7 @@ class subwarden:
         return
 
     subdomain_content = resp.text
-    data = self._load_Fingerprints()
+    # data = self._load_Fingerprints()
 
     for entry in data:
       if entry['fingerprint'] in subdomain_content and entry['fingerprint'] != "":
@@ -60,13 +60,14 @@ class subwarden:
               f.write(message + "\n")
 
   def active_detection_threaded(self, max_threads=50, output_File=None):
+    data = self._load_Fingerprints()
     with open(self.hosts, "r") as f:
       subdomains = f.read().split("\n")
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_threads) as executor:
       futures = []
       for subdomain in subdomains:
-        futures.append(executor.submit(self.active_detection, subdomain, output_File))
+        futures.append(executor.submit(self.active_detection, data, subdomain, output_File))
       
       for future in concurrent.futures.as_completed(futures):
         try:
