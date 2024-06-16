@@ -39,20 +39,21 @@ class subwarden:
     data = self._load_Fingerprints()
 
     for entry in data:
-      if entry['fingerprint'] in subdomain_content and entry['cname'] == []:
-        message = f"[{subdomain}] [{entry['status']}] [{entry['service']}] [BLANK_FP_CNAME]"
-        print(message)
-      elif entry['fingerprint'] in subdomain_content and entry['cname'] != []:
-        for record in cname_records:
-          for cname_fp in entry['cname']:
-            if re.search(re.escape(record), cname_fp):
-              message = f"[{subdomain}] [{entry['status']}] [{entry['service']}]"
-              print(message)
-
-      if output_File:
-        if message:
-          with open(output_File, "a") as f:
-            f.write(message + "\n")
+      if entry['fingerprint'] in subdomain_content and entry['fingerprint'] != "":
+        if entry['cname'] == []:
+          message = f"[{subdomain}] [{entry['status']}] [{entry['service']}] [BLANK_FP_CNAME]"
+          print(message)
+        else:
+          for record in cname_records:
+            for cname_fp in entry['cname']:
+              if re.search(re.escape(record), cname_fp):
+                message = f"[{subdomain}] [{entry['status']}] [{entry['service']}]"
+                print(message)
+  
+        if output_File:
+          if message:
+            with open(output_File, "a") as f:
+              f.write(message + "\n")
 
 if __name__ == "__main__":
   subwarden(hosts="foobar").active_detection(subdomain="sub.example.com")
