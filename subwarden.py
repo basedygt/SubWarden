@@ -4,6 +4,7 @@ import sys
 import dns.resolver
 import re
 import urllib3
+import concurrent.futures
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -58,5 +59,20 @@ class subwarden:
             with open(output_File, "a") as f:
               f.write(message + "\n")
 
+  def active_detection_threaded(self, max_threads=10, output_File=None):
+    with open(self.hosts, "r") as f:
+      subdomains = f.read().split("\n")
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_threads) as executor:
+      futures = []
+      for subdomain in subdomains:
+        futures.append(executor.submit(self.active_detection, subdomain, output_File))
+      
+      for future in concurrent.futures.as_completed(futures):
+        try:
+          future.result()
+        except Exception as e:
+          print(f"Error occurred: {str(e)}")
+
 if __name__ == "__main__":
-  subwarden(hosts="foobar").active_detection(subdomain="sub.example.com")
+  # subwarden(hosts="subs.txt").active_detection_threaded(output_File="subwarden.txt")
