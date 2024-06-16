@@ -19,7 +19,9 @@ $ python3 subwarden.py help
 |                                                      |
 --------------------------------------------------------
 
-Usage: python3 subwarden.py <subdomains_file> <output_file>
-Example:
-        python3 subwarden.py subs.txt output.txt
+Usage: python3 subwarden.py <subdomains_file> <output_file> <threads>
+
+Examples:
+  python3 subwarden.py subs.txt output.txt
+  python3 subwarden.py subs.txt output.txt 20
 ```
