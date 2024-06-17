@@ -1,7 +1,7 @@
 ### Checklist
 
 - [x] Active detection via matching vulnerable fingerprints served on web content and `cname` records
-- [x] Passive detection via matching `nxdomain` fingerprints in `cname` records
+- [x] Passive detection via matching `nxdomain` fingerprints of `cname` records
 - [x] Auto update and use latest Fingerprints from [can-i-takeover-xyz](https://github.com/EdOverflow/can-i-take-over-xyz)
 - [ ] Use more fingerprints from external sources
 - [ ] Detect additional DNS misconfiguration such as A records
