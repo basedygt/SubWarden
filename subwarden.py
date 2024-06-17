@@ -2,7 +2,6 @@ import json
 import requests
 import sys
 import dns.resolver
-import re
 import urllib3
 import concurrent.futures
 
