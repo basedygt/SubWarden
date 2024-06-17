@@ -85,7 +85,7 @@ class subwarden:
         except Exception as e:
             print(f"Error for subdomain {subdomain}: {str(e)}")
 
-    def detect_Takeover_threaded(self, max_threads=50, output_File=None):
+    def detect_Takeover_threaded(self, max_threads=25, output_File=None):
         data = self._load_Fingerprints()
 
         with open(self.hosts, "r") as f:
@@ -115,7 +115,12 @@ if __name__ == "__main__":
 """)
         print("Usage: python3 subwarden.py <subdomains_file> <output_file> <threads>\n")
         print("Examples:")
+        print("  python3 subwarden.py subs.txt")
         print("  python3 subwarden.py subs.txt output.txt")
-        print("  python3 subwarden.py subs.txt output.txt 20\n")
+        print("  python3 subwarden.py subs.txt output.txt 50\n")
+    elif len(sys.argv) == 2:
+        subwarden(hosts=f"{sys.argv[1]}").detect_Takeover_threaded(output_File=None, max_threads=25)
+    elif len(sys.argv) == 3:
+        subwarden(hosts=f"{sys.argv[1]}").detect_Takeover_threaded(output_File=f"{sys.argv[2]}", max_threads=25)
     else:
         subwarden(hosts=f"{sys.argv[1]}").detect_Takeover_threaded(output_File=f"{sys.argv[2]}", max_threads=int(sys.argv[3]))
