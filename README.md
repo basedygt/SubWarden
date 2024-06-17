@@ -22,6 +22,7 @@ $ python3 subwarden.py help
 Usage: python3 subwarden.py <subdomains_file> <output_file> <threads>
 
 Examples:
+  python3 subwarden.py subs.txt
   python3 subwarden.py subs.txt output.txt
-  python3 subwarden.py subs.txt output.txt 20
+  python3 subwarden.py subs.txt output.txt 50
 ```
